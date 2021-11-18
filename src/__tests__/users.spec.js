@@ -1,9 +1,9 @@
 const request = require('supertest');
 const { validate } = require('uuid');
 
-const app = require('../');
+const app = require('..');
 
-describe('Users', () => {
+describe.only('Users', () => {
   it('should be able to create a new user', async () => {
     const response = await request(app)
       .post('/users')

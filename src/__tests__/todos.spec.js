@@ -1,9 +1,9 @@
 const request = require('supertest');
 const { validate } = require('uuid');
 
-const app = require('../');
+const app = require('..');
 
-describe('Todos', () => {
+describe.only('Todos', () => {
   it("should be able to list all user's todo", async () => {
     const userResponse = await request(app)
       .post('/users')
