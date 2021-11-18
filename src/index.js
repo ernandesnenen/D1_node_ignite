@@ -10,12 +10,7 @@ app.use(express.json());
 
 const users = [];
 
-// { 
-// 	id: 'uuid', // precisa ser um uuid
-// 	name: 'Danilo Vieira', 
-// 	username: 'danilo', 
-// 	todos: []
-// }
+
 
 function checksExistsUserAccount(request, response, next) {
   const {username} = request.headers
@@ -39,7 +34,7 @@ app.post('/users', (request, response) => {
     todos: []
   }
 
-  if(users.some(element => element.username == user.username)){
+  if(users.some(element => element.username == username)){
     return  response.status(400).json({error: 'user already exists'})
   }
 
@@ -109,17 +104,16 @@ return response.status(200).json(todo)
 app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
 
   const {user} = request  
-  const {done}= request.body
   const {id} = request.params
 
  const todo = user.todos.find(item =>item.id === id )
  if(!todo){
   return response.status(404).json({error:'not exists'})
  }
- todo.done = done
+ todo.done = true
  
 
-return response.status(200).json(todo)
+return response.status(201).json(todo)
 
 
 });
